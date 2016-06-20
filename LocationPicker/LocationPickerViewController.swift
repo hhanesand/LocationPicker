@@ -122,8 +122,12 @@ public class LocationPickerViewController: UIViewController {
 			button.backgroundColor = currentLocationButtonBackground
 			button.layer.masksToBounds = true
 			button.layer.cornerRadius = 16
-            let bundle = NSBundle(identifier: "LocationPickerImages")
-			button.setImage(UIImage(named: "geolocation", inBundle: bundle, compatibleWithTraitCollection: nil), forState: .Normal)
+
+            if let bundlePath = NSBundle.mainBundle().pathForResource("LocationPicker-LocationPickerImages", ofType: "bundle") {
+                let bundle = NSBundle(path: bundlePath)
+                button.setImage(UIImage(named: "geolocation", inBundle: bundle, compatibleWithTraitCollection: nil), forState: .Normal)
+            }
+
 			button.addTarget(self, action: #selector(LocationPickerViewController.currentLocationPressed),
 			                 forControlEvents: .TouchUpInside)
 			view.addSubview(button)
